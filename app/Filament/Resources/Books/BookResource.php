@@ -15,6 +15,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Database\Eloquent\Model;
+use UnitEnum;
 
 class BookResource extends Resource
 {
@@ -24,13 +25,13 @@ class BookResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    // public static function getAuthorizationResponse(string $action, ?Model $record = null): Response
-    // {
-    //     if (auth()->user()->isAdmin() || $action === 'viewAny') {
-    //         return Response::allow();
-    //     }
-    //     return Response::deny();
-    // }
+    public static function getAuthorizationResponse(UnitEnum|string $action, ?Model $record = null): Response
+    {
+        if (auth()->user()->isAdmin() || $action === 'viewAny') {
+            return Response::allow();
+        }
+        return Response::deny();
+    }
 
     public static function form(Schema $schema): Schema
     {

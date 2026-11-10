@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use UnitEnum;
 
 class LoanResource extends Resource
 {
@@ -31,13 +32,13 @@ class LoanResource extends Resource
         }
         return $query;
     }
-    // public static function getAuthorizationResponse(string $action, ?Model $record = null): Response
-    // {
-    //     if ($action === 'viewAny') {
-    //         return Response::allow();
-    //     }
-    //     return Response::deny();
-    // }
+    public static function getAuthorizationResponse(UnitEnum|string $action, ?Model $record = null): Response
+    {
+        if ($action === 'viewAny') {
+            return Response::allow();
+        }
+        return Response::deny();
+    }
 
     public static function form(Schema $schema): Schema
     {
